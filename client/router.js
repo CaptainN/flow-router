@@ -185,7 +185,9 @@ Router.prototype.path = function(pathDef, fields, queryParams) {
 };
 
 Router.prototype.go = function(pathDef, fields, queryParams) {
-  var path = this.path(pathDef, fields, queryParams);
+  var path = (fields || queryParams)
+    ? this.path(pathDef, fields, queryParams)
+    : pathDef
 
   var useReplaceState = this.env.replaceState.get();
   if(useReplaceState) {
